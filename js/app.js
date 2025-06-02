@@ -1,9 +1,32 @@
 // ShoreSquad App JS
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Example: Fetch and display weather (placeholder)
+  // Fetch and display 4-day weather forecast from NEA API
   const weatherInfo = document.getElementById('weather-info');
-  weatherInfo.textContent = 'Sunny, 25°C (Demo)';
+  weatherInfo.textContent = 'Loading weather...';
+
+  fetch('https://api.data.gov.sg/v1/environment/4-day-weather-forecast')
+    .then(response => response.json())
+    .then(data => {
+      const forecasts = data.items[0].forecasts;
+      let html = '<div class="forecast-grid">';
+      forecasts.forEach(day => {
+        html += `
+          <div class="forecast-day">
+            <div class="forecast-date">${day.date}</div>
+            <div class="forecast-desc">${day.forecast}</div>
+            <div class="forecast-temp">${day.temperature.low}&deg;C - ${day.temperature.high}&deg;C</div>
+            <div class="forecast-rh">Humidity: ${day.relative_humidity.low}% - ${day.relative_humidity.high}%</div>
+            <div class="forecast-wind">Wind: ${day.wind.speed.low}-${day.wind.speed.high} km/h ${day.wind.direction}</div>
+          </div>
+        `;
+      });
+      html += '</div>';
+      weatherInfo.innerHTML = html;
+    })
+    .catch(() => {
+      weatherInfo.textContent = 'Weather forecast unavailable.';
+    });
 
   // Example: Load events (placeholder)
   const eventList = document.getElementById('event-list');

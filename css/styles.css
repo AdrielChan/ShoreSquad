@@ -69,6 +69,39 @@ footer {
   padding: 1rem;
 }
 
+#weather-info .forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+#weather-info .forecast-day {
+  background: var(--seafoam-green);
+  color: var(--charcoal);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 4px rgba(34,40,49,0.06);
+  text-align: center;
+}
+
+#weather-info .forecast-date {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+#weather-info .forecast-desc {
+  font-size: 1.1em;
+  margin-bottom: 0.5rem;
+}
+
+#weather-info .forecast-temp,
+#weather-info .forecast-rh,
+#weather-info .forecast-wind {
+  font-size: 0.95em;
+  margin-bottom: 0.25rem;
+}
+
 @media (max-width: 600px) {
   main {
     padding: 1rem;
